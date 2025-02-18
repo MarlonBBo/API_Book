@@ -105,6 +105,66 @@ namespace API_Book.Infra
                 return resposta;
             }
         }
+
+        public async Task<RespondeModel<List<Autor>>> EditarAutor(AutorEdicaoDTO autorEdicaoDTO)
+        {
+            RespondeModel<List<Autor>> resposta = new RespondeModel<List<Autor>>();
+
+            try
+            {
+
+                var autor = await _connectionContext.Autores.FirstOrDefaultAsync(autorBanco => autorBanco.Id == autorEdicaoDTO.Id);
+
+                if (autor == null)
+                {
+                    resposta.Message = "Autor não encontrado";
+                    return resposta;
+                }
+
+                autor.Name = autorEdicaoDTO.Name;
+
+                _connectionContext.Update(autor);
+                await _connectionContext.SaveChangesAsync();
+                
+                resposta.Data = await _connectionContext.Autores.ToListAsync();
+                resposta.Message = "Editado com sucesso";
+                return resposta;
+
+            }catch(Exception ex)
+            {
+                resposta.Message = ex.Message;
+                return resposta;
+            }
+        }
+
+        public async Task<RespondeModel<List<Autor>>> ExcluirAutor(int idAutor)
+        {
+            RespondeModel<List<Autor>> resposta = new RespondeModel<List<Autor>>();
+
+            try
+            {
+                var autor = await _connectionContext.Autores.FirstOrDefaultAsync(autorBanco => autorBanco.Id == idAutor);
+
+                if (autor == null)
+                {
+                    resposta.Message = "Nenhum autor localizado";
+                    return resposta;
+                }
+
+                _connectionContext.Remove(autor);
+                await _connectionContext.SaveChangesAsync();
+
+                resposta.Data = await _connectionContext.Autores.ToListAsync();
+                resposta.Message = "Autor removido com sucesso!";
+
+                return resposta;
+            }
+            catch (Exception ex)
+            {
+                resposta.Message = ex.Message;
+                return resposta;
+            }
+        }
     }
 }
 

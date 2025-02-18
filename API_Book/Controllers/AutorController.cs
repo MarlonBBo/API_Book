@@ -37,12 +37,24 @@ namespace API_Book.Controllers
         }
 
         [HttpPost("CriarAutor")]
-        public async Task<ActionResult<RespondeModel<Autor>>> CriarAutor(AutorCriacaoDTO autorCriacao)
+        public async Task<ActionResult<RespondeModel<List<Autor>>>> CriarAutor(AutorCriacaoDTO autorCriacao)
         {
             var autores = await _repository.CriarAutor(autorCriacao);
             return Ok(autores);
         }
 
+        [HttpPut("EditarAutor")]
+        public async Task<ActionResult<RespondeModel<List<Autor>>>> EditarAutor(AutorEdicaoDTO autorEdicaoDTO)
+        {
+            var autor = await _repository.EditarAutor(autorEdicaoDTO);
+            return Ok(autor);
+        }
 
+        [HttpDelete("ExcluirAutor")]
+        public async Task<ActionResult<RespondeModel<List<Autor>>>> ExcluirAutor(int idAutor)
+        {
+            var autor = await _repository.ExcluirAutor(idAutor);
+            return Ok(autor);
+        }
     }
 }
