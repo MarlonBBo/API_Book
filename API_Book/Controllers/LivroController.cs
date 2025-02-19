@@ -1,4 +1,5 @@
-﻿using API_Book.Model;
+﻿using API_Book.DTO.LivroDTO;
+using API_Book.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_Book.Controllers
@@ -25,6 +26,34 @@ namespace API_Book.Controllers
         public async Task<ActionResult<RespondeModel<List<Livro>>>> ListaDeLivros()
         {
             var livro = await _repository.ListaDeLivros();
+            return Ok(livro);
+        }
+
+        [HttpGet("BuscarLivroPorAutor/{idAutor}")]
+        public async Task<ActionResult<RespondeModel<List<Livro>>>> BuscarLivroPorAutor(int idAutor)
+        {
+            var livro = await _repository.BuscarLivroIdAutor(idAutor);
+            return Ok(livro);
+        }
+
+        [HttpPost("CriarLivro")]
+        public async Task<ActionResult<RespondeModel<List<Livro>>>> CriarLivro(LivroCriacaoDTO livroCriacaoDTO)
+        {
+            var livro = await _repository.CriarLivro(livroCriacaoDTO);
+            return Ok(livro);
+        }
+
+        [HttpPut("EditarLivro")]
+        public async Task<ActionResult<RespondeModel<List<Livro>>>> EditarLivro(LivroEdicaoDTO livroEdicaoDTO)
+        {
+            var livro = _repository.EditarLivro(livroEdicaoDTO);
+            return Ok(livro);
+        }
+
+        [HttpDelete("ExcluirLivro")]
+        public async Task<ActionResult<RespondeModel<List<Livro>>>> ExcluirLivro(int idLivro)
+        {
+            var livro = await _repository.ExcluirLivro(idLivro);
             return Ok(livro);
         }
     }

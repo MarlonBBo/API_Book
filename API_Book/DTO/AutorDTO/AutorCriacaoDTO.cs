@@ -1,4 +1,4 @@
-﻿namespace API_Book.DTO.Autor
+﻿namespace API_Book.DTO.AutorDTO
 {
     public class AutorCriacaoDTO
     {

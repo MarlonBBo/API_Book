@@ -1,6 +1,6 @@
-﻿namespace API_Book.DTO.Autor
+﻿namespace API_Book.DTO.AutorDTO
 {
-    public class AutorEdicaoDTO
+    public class AutorVinculoDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }

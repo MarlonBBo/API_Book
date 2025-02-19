@@ -1,4 +1,4 @@
-﻿using API_Book.DTO.Autor;
+﻿using API_Book.DTO.AutorDTO;
 using API_Book.Model;
 using Microsoft.AspNetCore.Mvc;
 

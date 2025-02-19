@@ -1,4 +1,4 @@
-﻿using API_Book.DTO.Autor;
+﻿using API_Book.DTO.AutorDTO;
 
 namespace API_Book.Model
 {
